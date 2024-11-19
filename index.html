@@ -1,0 +1,41 @@
+ <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darknet Search</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  
+<div id="sleepMode" class="hidden">
+    <div id="clock"></div>
+</div>
+
+<div class="info-container">
+    <div class="info-card" id="connection-speed">
+        Speed: Loading...
+    </div>
+    <div class="info-card" id="ip-info">
+        IP: Loading... | Country: Loading...
+    </div>
+</div>
+
+<div class="search-container">
+    <h1 id="pageTitle">Search</h1>
+    <input type="text" id="searchQuery" placeholder="Enter .onion search query..." />
+    
+    <button class="search-button" id="searchButton" onclick="search()">
+        Search on Bing
+    </button>
+
+    <!-- Dropdown for search engine selection -->
+    <div class="dropdown" id="dropdown">
+        <button id="bing" onclick="setSearchEngine('Bing', this)">Bing</button>
+        <button id="duckDuckGo" onclick="setSearchEngine('DuckDuckGo', this)">DuckDuckGo</button>
+        <button id="ahmia" onclick="setSearchEngine('Ahmia', this)">Ahmia</button>
+    </div>
+</div>
+  
+<script src="scripts.js"></script>
+</body>
+</html>
