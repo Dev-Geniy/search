@@ -164,83 +164,6 @@ input[type="text"]:focus {
     text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
 }
 
-/* виджеты */
-/* Стиль для подвала */
-footer {
-    background-color: rgba(0, 0, 0, 0.8); /* Темный полупрозрачный фон */
-    padding: 20px;
-    text-align: center;
-    font-size: 14px;
-    color: white;
-    margin-top: 30px;
-    border-top: 1px solid #ddd;
-    position: relative;
-}
-
-.footer-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.footer-column {
-    flex: 1;
-    padding: 10px;
-    min-width: 200px;
-}
-
-.footer-column p {
-    margin: 5px 0;
-}
-
-.footer-column a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-.footer-column a:hover {
-    text-decoration: underline;
-}
-
-/* Новый блок с сервисами */
-.services-container {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    max-width: 1200px;
-    margin: 20px auto 0;
-    color: white;
-    font-size: 14px;
-}
-
-.services-column {
-    flex: 1;
-    padding: 10px;
-    min-width: 250px;
-    margin: 10px;
-}
-
-.services-column h3, .services-column h4 {
-    margin-top: 20px;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.services-column p {
-    margin: 5px 0;
-}
-
-.services-column a {
-    color: #007bff;
-    text-decoration: none;
-}
-
-.services-column a:hover {
-    text-decoration: underline;
-}
-
 /* БАТАРЕЯ */
 #battery-container {
     position: fixed;
@@ -272,4 +195,117 @@ footer {
 
 #searchButton {
     user-select: none; /* Отключаем выделение текста */
+}
+
+/* ПУШ*/
+.push-notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 1000;
+    animation: slideIn 0.5s ease-in-out;
+}
+
+.push-notification.hidden {
+    display: none;
+}
+
+.push-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.push-content p {
+    margin: 0 0 10px;
+    font-size: 16px;
+}
+
+.push-btn {
+    background: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 15px;
+    margin: 5px 0;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+    width: 100%; /* Make all buttons stretch to the full container width */
+    text-align: center; /* Center-align text */
+    box-sizing: border-box; /* Ensure padding doesn't affect button size */
+}
+
+.push-btn:hover {
+    background: #0056b3;
+}
+
+.push-content {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch; /* Ensure child elements (buttons) stretch to fill width */
+}
+
+.push-close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* ЗАКЛАДКИ */
+.bookmarks-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.bookmarks-row {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.bookmark {
+    display: inline-block;
+    width: 50px; /* Размер иконки */
+    height: 50px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bookmark img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Чтобы изображение не искажалось */
+}
+
+.bookmark:hover {
+    transform: scale(1.1); /* Увеличение при наведении */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Более интенсивная тень */
 }
