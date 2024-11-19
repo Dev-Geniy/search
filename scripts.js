@@ -11,13 +11,13 @@ function setSearchEngine(engine, button) {
     
     if (engine === 'Bing') {
         animateBackground("https://img.freepik.com/free-photo/soft-gradient-background_23-2150525049.jpg");
-        document.getElementById('pageTitle').textContent = 'Search';
+        setPageTitle('SEARCH');
     } else if (engine === 'DuckDuckGo') {
         animateBackground("https://st2.depositphotos.com/33704592/48552/i/450/depositphotos_485524106-stock-photo-abstract-polygonal-space-low-poly.jpg");
-        document.getElementById('pageTitle').textContent = 'DEEPWEB SEARCH';
+        setPageTitle('DEEPWEB SEARCH');
     } else if (engine === 'Ahmia') {
         animateBackground("https://overclockers.ru/st/legacy/blog/422417/398390_O.jpg");
-        document.getElementById('pageTitle').textContent = 'Darknet Search';
+        setPageTitle('Darknet Search');
     }
 
     closeDropdown();
@@ -29,14 +29,20 @@ function closeDropdown() {
 
 // Анимация изменения фона
 function animateBackground(newImage) {
-    document.body.style.transition = "none";
-    document.body.style.opacity = "0";
+    document.body.style.transition = "background-image 1s ease-in-out";
+    document.body.style.backgroundImage = `url(${newImage})`;
+}
 
+// Функция для анимации названия
+function setPageTitle(title) {
+    const pageTitleElement = document.getElementById('pageTitle');
+    pageTitleElement.textContent = title;
+    
+    // Убираем старую анимацию и добавляем новую
+    pageTitleElement.style.animation = 'none';
     setTimeout(() => {
-        document.body.style.backgroundImage = `url(${newImage})`;
-        document.body.style.opacity = "1";
-        document.body.style.transition = "opacity 1s ease-in-out";
-    }, 200);
+        pageTitleElement.style.animation = 'typing 3s steps(30) 1s 1 normal both';
+    }, 100); // Даем немного времени, чтобы анимация сбросилась
 }
 
 function search() {
@@ -56,10 +62,19 @@ function search() {
 
 // Открытие выпадающего меню
 let holdTimer;
-document.getElementById('searchButton').addEventListener('mousedown', function() {
+function openDropdown() {
     holdTimer = setTimeout(function() {
         document.getElementById('dropdown').style.display = 'block';
     }, 1000);
+}
+
+document.getElementById('searchButton').addEventListener('mousedown', function() {
+    openDropdown();
+});
+
+document.getElementById('searchButton').addEventListener('touchstart', function(event) {
+    event.preventDefault(); // Останавливаем стандартное поведение (например, выделение текста)
+    openDropdown();
 });
 
 document.getElementById('searchButton').addEventListener('mouseup', function() {
@@ -76,6 +91,8 @@ window.addEventListener('click', function(event) {
         closeDropdown();
     }
 });
+
+
 
 // 2. IP-адрес и скорость
 function fetchIpInfo() {
@@ -185,4 +202,27 @@ function initializeSleepMode() {
 // Запуск скрипта после загрузки страницы
 document.addEventListener('DOMContentLoaded', initializeSleepMode);
 
-// Безопасность новости
+// Батарея
+// Функция для обновления индикатора батареи
+function updateBatteryIndicator(battery) {
+    const batteryLevel = document.getElementById('battery-level');
+    const level = battery.level * 100; // Получаем уровень заряда в процентах
+    batteryLevel.style.width = level + '%';
+
+    // Если уровень заряда ниже 20%, показываем предупреждение
+    if (level < 20) {
+        batteryLevel.style.backgroundColor = 'red'; // Красный цвет для низкого заряда
+    } else {
+        batteryLevel.style.backgroundColor = 'green'; // Зеленый цвет для нормального заряда
+    }
+}
+
+// Получаем информацию о батарее устройства
+navigator.getBattery().then(function(battery) {
+    updateBatteryIndicator(battery);
+
+    // Обновляем индикатор, когда уровень заряда изменяется
+    battery.addEventListener('levelchange', function() {
+        updateBatteryIndicator(battery);
+    });
+});
