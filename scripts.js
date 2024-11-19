@@ -74,6 +74,14 @@ function executeSearch() {
     search();  // Выполняем поиск
 }
 
+// Добавляем обработчик события для нажатия клавиши Enter
+document.getElementById('searchQuery').addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') { // Проверяем, была ли нажата клавиша Enter
+        event.preventDefault(); // Останавливаем стандартное поведение (например, отправка формы)
+        search(); // Запускаем поиск
+    }
+});
+
 // Обработчики событий для кнопки поиска
 document.getElementById('searchButton').addEventListener('mousedown', function() {
     // Сбрасываем таймер поиска, если был предыдущий
@@ -135,7 +143,7 @@ function fetchIpInfo() {
 function fetchConnectionSpeed() {
     setInterval(() => {
         const randomSpeed = Math.floor(Math.random() * 100) + 50;
-        document.getElementById('connection-speed').textContent = `Connection Speed: ${randomSpeed} Mbps`;
+        document.getElementById('connection-speed').textContent = `Speed: ${randomSpeed} Mbps`;
     }, 30000);
 }
 
@@ -249,4 +257,38 @@ navigator.getBattery().then(function(battery) {
     battery.addEventListener('levelchange', function() {
         updateBatteryIndicator(battery);
     });
+});
+
+// ПУШ
+function showPushNotification() {
+    const pushNotification = document.getElementById('pushNotification');
+    pushNotification.classList.remove('hidden');
+}
+
+document.getElementById('addShortcut').addEventListener('click', function() {
+    if (navigator.canShare) {
+        navigator.share({
+            title: 'Search',
+            text: 'Add a shortcut to your home screen!',
+            url: window.location.href
+        }).catch(err => {
+            console.error("Error adding shortcut:", err);
+            alert('Your browser does not support adding shortcuts via this button.');
+        });
+    } else {
+        alert('Unfortunately, your browser does not support adding shortcuts.');
+    }
+});
+
+document.getElementById('setHomepage').addEventListener('click', function() {
+    alert('To make this site your homepage:\n\n1. Open your browser settings.\n2. Find the "Homepage" section.\n3. Set the URL to: ' + window.location.href);
+});
+
+document.getElementById('closePush').addEventListener('click', function() {
+    document.getElementById('pushNotification').classList.add('hidden');
+});
+
+// Show the notification 5 seconds after the page loads
+window.addEventListener('load', function() {
+    setTimeout(showPushNotification, 5000);
 });
