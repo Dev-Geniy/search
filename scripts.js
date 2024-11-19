@@ -53,7 +53,7 @@ function search() {
     if (currentSearchEngine === 'Bing') {
         url = `https://www.bing.com/search?q=${encodeURIComponent(query)}`;
     } else if (currentSearchEngine === 'DuckDuckGo') {
-        url = `https://duckduckgo.com/?q=${encodeURIComponent(query)} site:*.onion`;
+        url = `https://duckduckgo.com/?q=${encodeURIComponent(query)}`;
     } else if (currentSearchEngine === 'Ahmia') {
         url = `https://ahmia.fi/search/?q=${encodeURIComponent(query)}`;
     }
@@ -67,7 +67,7 @@ let searchTimer;
 function openDropdown() {
     holdTimer = setTimeout(function() {
         document.getElementById('dropdown').style.display = 'block';
-    }, 1000);
+    }, 1500);
 }
 
 function executeSearch() {
@@ -87,8 +87,8 @@ document.getElementById('searchButton').addEventListener('mousedown', function()
 document.getElementById('searchButton').addEventListener('mouseup', function() {
     clearTimeout(holdTimer);  // Останавливаем таймер меню
     searchTimer = setTimeout(function() {
-        executeSearch();  // Если кнопка была нажата меньше чем 1 секунду, выполняем поиск
-    }, 200);  // 200 мс задержки для выполнения поиска
+        executeSearch();  // Если кнопка была нажата меньше чем 1,5 секунды, выполняем поиск
+    }, 20);  // 20 мс задержки для выполнения поиска
 });
 
 document.getElementById('searchButton').addEventListener('mouseleave', function() {
@@ -108,7 +108,7 @@ document.getElementById('searchButton').addEventListener('touchend', function() 
     clearTimeout(holdTimer);  // Останавливаем таймер меню
     searchTimer = setTimeout(function() {
         executeSearch();  // Если кнопка была нажата менее чем 1 секунду, выполняем поиск
-    }, 200);  // 200 мс задержки для выполнения поиска
+    }, 20);  // 20 мс задержки для выполнения поиска
 });
 
 // Закрытие меню при клике вне
@@ -197,8 +197,8 @@ function resetSleepTimer() {
         // Через 1 минуту после спящего режима — снижение яркости
         brightnessTimeout = setTimeout(() => {
             document.body.style.filter = 'brightness(50%)';
-        }, 30000); // 1 минута
-    }, 30000); // 3 минуты
+        }, 15000);
+    }, 30000);
 }
 
 // Сброс спящего режима при активности пользователя
