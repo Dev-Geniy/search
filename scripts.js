@@ -11,13 +11,13 @@ function setSearchEngine(engine, button) {
     
     if (engine === 'Bing') {
         animateBackground("https://img.freepik.com/free-photo/soft-gradient-background_23-2150525049.jpg");
-        setPageTitle('SEARCH');
+        document.getElementById('pageTitle').textContent = 'SEARCH';
     } else if (engine === 'DuckDuckGo') {
         animateBackground("https://st2.depositphotos.com/33704592/48552/i/450/depositphotos_485524106-stock-photo-abstract-polygonal-space-low-poly.jpg");
-        setPageTitle('DEEPWEB SEARCH');
+        document.getElementById('pageTitle').textContent = 'DEEPWEB SEARCH';
     } else if (engine === 'Ahmia') {
         animateBackground("https://overclockers.ru/st/legacy/blog/422417/398390_O.jpg");
-        setPageTitle('Darknet Search');
+        document.getElementById('pageTitle').textContent = 'Darknet Search';
     }
 
     closeDropdown();
@@ -62,27 +62,53 @@ function search() {
 
 // Открытие выпадающего меню
 let holdTimer;
+let searchTimer;
+
 function openDropdown() {
     holdTimer = setTimeout(function() {
         document.getElementById('dropdown').style.display = 'block';
     }, 1000);
 }
 
-document.getElementById('searchButton').addEventListener('mousedown', function() {
-    openDropdown();
-});
+function executeSearch() {
+    search();  // Выполняем поиск
+}
 
-document.getElementById('searchButton').addEventListener('touchstart', function(event) {
-    event.preventDefault(); // Останавливаем стандартное поведение (например, выделение текста)
+// Обработчики событий для кнопки поиска
+document.getElementById('searchButton').addEventListener('mousedown', function() {
+    // Сбрасываем таймер поиска, если был предыдущий
+    if (searchTimer) {
+        clearTimeout(searchTimer);
+    }
+    // Запускаем таймер для открытия меню
     openDropdown();
 });
 
 document.getElementById('searchButton').addEventListener('mouseup', function() {
-    clearTimeout(holdTimer);
+    clearTimeout(holdTimer);  // Останавливаем таймер меню
+    searchTimer = setTimeout(function() {
+        executeSearch();  // Если кнопка была нажата меньше чем 1 секунду, выполняем поиск
+    }, 200);  // 200 мс задержки для выполнения поиска
 });
 
 document.getElementById('searchButton').addEventListener('mouseleave', function() {
     clearTimeout(holdTimer);
+    clearTimeout(searchTimer);
+});
+
+document.getElementById('searchButton').addEventListener('touchstart', function(event) {
+    event.preventDefault(); // Останавливаем стандартное поведение (например, выделение текста)
+    if (searchTimer) {
+        clearTimeout(searchTimer);
+    }
+    openDropdown();
+});
+
+document.getElementById('searchButton').addEventListener('touchend', function() {
+    clearTimeout(holdTimer);  // Останавливаем таймер меню
+    searchTimer = setTimeout(function() {
+        executeSearch();  // Если кнопка была нажата менее чем 1 секунду, выполняем поиск
+    }, 200);  // 200 мс задержки для выполнения поиска
 });
 
 // Закрытие меню при клике вне
@@ -91,8 +117,6 @@ window.addEventListener('click', function(event) {
         closeDropdown();
     }
 });
-
-
 
 // 2. IP-адрес и скорость
 function fetchIpInfo() {
