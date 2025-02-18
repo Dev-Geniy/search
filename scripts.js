@@ -16,7 +16,7 @@ function setSearchEngine(engine, button) {
         animateBackground("https://st2.depositphotos.com/33704592/48552/i/450/depositphotos_485524106-stock-photo-abstract-polygonal-space-low-poly.jpg");
         document.getElementById('pageTitle').textContent = 'DEEPWEB SEARCH';
     } else if (engine === 'Ahmia') {
-        animateBackground("https://overclockers.ru/st/legacy/blog/422417/398390_O.jpg");
+        animateBackground("https://img.freepik.com/premium-photo/horror-ghost-girl-matte-glass-black-white-halloween-festival-concept_1418-2156.jpg?w=900");
         document.getElementById('pageTitle').textContent = 'Darknet Search';
     }
 
