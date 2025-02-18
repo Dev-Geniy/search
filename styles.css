@@ -129,12 +129,6 @@ input[type="text"]:focus {
     }
 }
 
-/*======================================*/
-
-
-
-
-/*=====================================*/
 /* Стиль спящего режима */
 #sleepMode {
     position: fixed;
@@ -271,41 +265,4 @@ input[type="text"]:focus {
         transform: translateY(0);
         opacity: 1;
     }
-}
-
-/* ЗАКЛАДКИ */
-.bookmarks-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.bookmarks-row {
-    display: flex;
-    gap: 15px;
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-.bookmark {
-    display: inline-block;
-    width: 50px; /* Размер иконки */
-    height: 50px;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.bookmark img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; /* Чтобы изображение не искажалось */
-}
-
-.bookmark:hover {
-    transform: scale(1.1); /* Увеличение при наведении */
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Более интенсивная тень */
 }
